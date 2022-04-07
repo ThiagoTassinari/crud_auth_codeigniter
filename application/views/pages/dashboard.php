@@ -29,14 +29,12 @@
                 <tbody>
                     <?php foreach($games as $game) : ?>
                     <tr>
-                        <td>
                         <td><?= $game['id'] ?> </td>
                         <td><?= $game['name'] ?> </td>
                         <td><?= $game['price'] ?> </td>
                         <td><?= $game['developer'] ?> </td>
                         <td><?= $game['release_date'] ?> </td>
                         <td>xxx</td>
-                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
