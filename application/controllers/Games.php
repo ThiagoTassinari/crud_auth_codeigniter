@@ -22,7 +22,7 @@ class Games extends CI_Controller {
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/nav-top', $data);
-		$this->load->view('pages/games/new', $data);
+		$this->load->view('pages/form-games', $data);
 		$this->load->view('templates/footer', $data);
 		$this->load->view('templates/js', $data);
 	}
