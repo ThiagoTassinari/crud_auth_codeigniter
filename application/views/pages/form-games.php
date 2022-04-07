@@ -5,7 +5,7 @@
 
 			<div class="col-md-12">
 					
-					<form action="" method="post">
+					<form action="<?=base_url() ?>games/store" method="post">
 					
 					<div class="col-md-6">
 						<div class="form-group">
@@ -34,7 +34,7 @@
                             <input type="text" class="form-control" name="developer" id="developer" placeholder="Developer" value="" required>
                         </div>
                     </div>
-                    
+
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="release_date">Release Date</label>
