@@ -32,7 +32,7 @@
                             <i class="fas fa-pencil-alt"></i>
                             Edit
                         </a>
-                        <a href="<?= base_url() ?>games/delete/<?= $game['id'] ?>" class="btn btn-sm btn-danger">
+                        <a href="javascript:goDelete(<?= $game['id'] ?>)" class="btn btn-sm btn-danger">
                             <i class="fas fa-trash-alt"></i>
                             Delete
                         </a>
@@ -43,3 +43,16 @@
         </table>
     </div>
 </main>
+
+<script>
+    function goDelete(id) {
+        var myUrl = 'games/delete/' + id;
+        
+        if (confirm('Deseja realmente apagar este registro')) {
+            window.location.href = myUrl;
+        } else {
+            alert('Registro não alterado');
+            return false;
+        }
+    }
+</script>

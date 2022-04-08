@@ -3,6 +3,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Games extends CI_Controller {
 	
+	/**
+	 * Refatoração: Toda vez que chamar a classe controller Games, então a função _construct vai carregar todos os outros
+	 * métodos que utilizam da model_games. 
+	 * funções abaixo.
+	 *
+	 * @return void
+	*/
+	public function _construct()
+	{
+		parent::__construct();
+		$this->load->model("games_model");
+	}
+
 	public function index()
 	{
 		$this->load->model("games_model");
@@ -63,12 +76,32 @@ class Games extends CI_Controller {
 		$this->load->view('templates/footer', $data);
 		$this->load->view('templates/js', $data);
 	}
-
+	
+	/**
+	 * O método UPDATE carregará a função dentro do arquivo games_modal.php e atualiza os dados no banco de dados pelo id e o game.
+	 * No final, a página será redirecionada para a page games.
+	 *
+	 * @param  mixed $id
+	 * @return void
+	 */
 	public function update($id)
 	{
-		$this->load->model('games_model');
+		$this->load->model("games_model");
 		$game = $_POST;
 		$this->games_model->update($id, $game);
+		redirect("games");
+	}
+	
+	/**
+	 * O argumento $id que estou passando na função DELETE será retornado quando for chamado a função remove no 
+	 * arquivo games_model.
+	 *
+	 * @param  mixed $id
+	 * @return void
+	 */
+	public function delete($id) {
+		$this->load->model("games_model");
+		$this->games_model->remove($id);
 		redirect("games");
 	}
 }
