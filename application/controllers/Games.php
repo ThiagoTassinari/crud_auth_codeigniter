@@ -58,7 +58,7 @@ class Games extends CI_Controller {
 	public function store()
 	{
 		$game = $_POST;
-		$game['user_id'] = '1';
+		$game['id'] = '1';
 		$this->load->model("games_model");
 		$this->games_model->store($game);
 		redirect("dashboard");
