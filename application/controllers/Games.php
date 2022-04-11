@@ -1,9 +1,10 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Games extends CI_Controller {
-	
-	
+class Games extends CI_Controller
+{
+
+
 	/**
 	 *  A função __construct() vai sobrescrever todos os métodos como uma super-classe injetado 
 	 * 	o método permissions() para autentificação do usuário logado ou não. 
@@ -19,23 +20,21 @@ class Games extends CI_Controller {
 		parent::__construct();
 		permissions();
 		$this->load->model("games_model");
-		$data["games"] = $this->games_model->index();
 	}
 
 	public function index()
 	{
-		$this->load->model("games_model");
-		
-        $data["title"] = 'Games - CodeIgniter';
+		$data["games"]  = $this->games_model->index();
+		$data["title"] = "Games - CodeIgniter";
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/nav-top', $data);
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/nav-top', $data);
 		$this->load->view('pages/games', $data);
 		$this->load->view('templates/footer', $data);
 		$this->load->view('templates/js', $data);
 	}
 
-		
+
 	/**
 	 * A função new chama um novo formulário com seus templates
 	 *
@@ -45,14 +44,14 @@ class Games extends CI_Controller {
 	{
 		$data["title"] = 'Games - CodeIgniter';
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/nav-top', $data);
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/nav-top', $data);
 		$this->load->view('pages/form-games', $data);
 		$this->load->view('templates/footer', $data);
 		$this->load->view('templates/js', $data);
 	}
 
-		
+
 	/**
 	 * A função store retorna os valores preenchidos do novo formulário de jogos e atualiza
 	 * os registro da tb_games do banco de dados com os novos dados. Por fim, será redirecionado
@@ -64,7 +63,7 @@ class Games extends CI_Controller {
 	public function store()
 	{
 		$game = $_POST;
-		$game['id'] = '1';
+		// $game['id'] = '1';
 		$this->load->model("games_model");
 		$this->games_model->store($game);
 		redirect("dashboard");
@@ -74,15 +73,15 @@ class Games extends CI_Controller {
 	{
 		$this->load->model("games_model");
 		$data["game"] = $this->games_model->show($id);
-        $data["title"] = 'Edit Game - CodeIgniter';
+		$data["title"] = 'Edit Game - CodeIgniter';
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/nav-top', $data);
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/nav-top', $data);
 		$this->load->view('pages/form-games', $data);
 		$this->load->view('templates/footer', $data);
 		$this->load->view('templates/js', $data);
 	}
-	
+
 	/**
 	 * O método UPDATE carregará a função dentro do arquivo games_modal.php e atualiza os dados no banco de dados pelo id e o game.
 	 * No final, a página será redirecionada para a page games.
@@ -97,7 +96,7 @@ class Games extends CI_Controller {
 		$this->games_model->update($id, $game);
 		redirect("games");
 	}
-	
+
 	/**
 	 * O argumento $id que estou passando na função DELETE será retornado quando for chamado a função remove no 
 	 * arquivo games_model.
@@ -105,7 +104,8 @@ class Games extends CI_Controller {
 	 * @param  mixed $id
 	 * @return void
 	 */
-	public function delete($id) {
+	public function delete($id)
+	{
 		$this->load->model("games_model");
 		$this->games_model->remove($id);
 		redirect("games");
