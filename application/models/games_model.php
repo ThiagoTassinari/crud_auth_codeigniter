@@ -49,7 +49,13 @@ class Games_model extends CI_Model {
         $this->db->where("id", $id);
         return $this->db->update("tb_games", $game);
     }
-
+    
+    /**
+     * O método remove deleta um registro da tabela dashboard
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function remove($id)
     {
         $this->db->where("id", $id);
