@@ -3,23 +3,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Games extends CI_Controller {
 	
+	
 	/**
-	 * Refatoração: Toda vez que chamar a classe controller Games, então a função _construct vai carregar todos os outros
-	 * métodos que utilizam da model_games. 
-	 * funções abaixo.
+	 *  A função __construct() vai sobrescrever todos os métodos como uma super-classe injetado 
+	 * 	o método permissions() para autentificação do usuário logado ou não. 
+	 * 	
+	 * 	Caso o usuário não estiver logado e tentar acessar a página Games, então será redirecionado
+	 *  para página de Login. Agora se o usuário estiver logado, logo ele têm permissão de executar 
+	 *  as ações do controller.
 	 *
 	 * @return void
-	*/
-	public function _construct()
+	 */
+	public function __construct()
 	{
 		parent::__construct();
+		permissions();
 		$this->load->model("games_model");
+		$data["games"] = $this->games_model->index();
 	}
 
 	public function index()
 	{
 		$this->load->model("games_model");
-		$data["games"] = $this->games_model->index();
+		
         $data["title"] = 'Games - CodeIgniter';
 
         $this->load->view('templates/header', $data);
@@ -31,7 +37,7 @@ class Games extends CI_Controller {
 
 		
 	/**
-	 * A função new chama um novo formulário com seus template s
+	 * A função new chama um novo formulário com seus templates
 	 *
 	 * @return void
 	 */

@@ -13,6 +13,12 @@ class Login extends CI_Controller
 	{
 		$data["title"] = 'Login - CodeIgniter';
 		$this->load->view('pages/login', $data);
+
+		// Seta todas informações quando o usuário está logado na sessão. 		 
+		// print "<pre>";
+		// print_r($_SESSION);
+		// print "</pre>"; 
+		// exit();
 	}
 
 	/**
@@ -37,7 +43,8 @@ class Login extends CI_Controller
 		}
 	}
 
-	public function logout() {
+	public function logout()
+	{
 		$this->session->unset_userdata("logged_user");
 		redirect("login");
 	}
