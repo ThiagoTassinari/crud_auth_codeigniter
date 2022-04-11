@@ -30,7 +30,6 @@ class Dashboard extends CI_Controller
 	 */
 	public function index()
 	{
-		permissions();
 		$this->load->model("games_model");
 		$data["games"] = $this->games_model->index();
 		$data["title"] = 'Dashboard - CodeIgniter';
@@ -38,6 +37,19 @@ class Dashboard extends CI_Controller
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/nav-top', $data);
 		$this->load->view('pages/dashboard', $data);
+		$this->load->view('templates/footer', $data);
+		$this->load->view('templates/js', $data);
+	}
+
+	public function search()
+	{
+		$this->load->model("search_model");
+		$data["title"] = "Resultado da pesquisa por *" . $_POST["search"] . "*";
+		$data["result"] = $this->search_model->search($_POST);
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/nav-top', $data);
+		$this->load->view('pages/result', $data);
 		$this->load->view('templates/footer', $data);
 		$this->load->view('templates/js', $data);
 	}
