@@ -9,9 +9,18 @@ class Games_model extends CI_Model {
      */
     public function index() 
     {
+		$this->db->order_by("name", "ASC");
         return $this->db->get("tb_games")->result_array();
     }
  
+	public function dashboard_index()
+	{
+		$this->db->order_by("id", "DESC");
+		$this->db->limit(5);
+		return $this->db->get("tb_games")->result_array();
+	}
+
+
     /**
      * A função store vai gravar os dados da tabela de jogos no banco de dados
      *
